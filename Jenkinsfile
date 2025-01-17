@@ -5,9 +5,9 @@ pipeline {
         APP_NAME = "flask-app"
         DOCKER_IMAGE = "flask-app-image"
         DOCKER_PORT = "5000"
-        EC2_USER = "ec2-user"
-        EC2_HOST = "<YOUR_EC2_PUBLIC_IP>"
-        EC2_KEY_PATH = "/path/to/your/private/key.pem"  // Update with your private key path
+        EC2_USER = "EC2-PROJECT"
+        EC2_HOST = "98.81.203.3"
+        EC2_KEY_PATH = " /home/ubuntu/.ssh/id_ed25519.pub"  // Update with your private key path
         VENV_DIR = "venv" // Directory for virtual environment
     }
 
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "Deploying to EC2 instance..."
                 sh """
-                ssh -i ${EC2_KEY_PATH} ${EC2_USER}@${EC2_HOST} << 'EOF'
+                ssh -i ${ /home/ubuntu/.ssh/id_ed25519.pub} ${EC2_PROJECT}@${EC2_HOST} << 'EOF'
                 # Stop and remove any existing container
                 docker stop ${APP_NAME} || true
                 docker rm ${APP_NAME} || true
